@@ -13,37 +13,36 @@ html {
 body {
   width: 100%;
   min-height: 100vh;
-  background: #fff;
+  background: #34F6F2;
   padding: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  color: #4D243D;
 }
 header,
-main,
-footer {
+main{
   width: 100%;
   max-width: 500px;
 }
 header {
-  border-bottom: 2px solid #000;
+  border-bottom: 2px solid #7D53DE;
 }
-h1 {
+h1,h3 {
   font-size: 1.5rem;
   padding: 0.5em 0;
-  color: #000;
+  color: #7D53DE;
 }
 section {
   padding-bottom: 1.5rem;
   padding: 0.5rem 0;
+  border: 2px solid #D0A98F;
 }
-footer {
-  border-top: 2px solid #000;
-  padding-right: 0.5rem;
-}
-footer > p {
-  text-align: right;
-  font-size: 1rem;
-  margin: 1rem 0;
+button {
+  background-color: #EDD4B2;
+  border: none;
+  color: #4D243D;
+  padding: 2px 4px;
+  margin-left: 1px;
 }
