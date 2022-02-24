@@ -30,6 +30,8 @@
 		<input type="hidden" name="submitType" value="category">
 
 	</form>
+	<br><br>
+	
 	<form class="switchForm" action="index.php" method="get">
 	<button type="switch" name="view" value="todo">Go Back to the To Do List</button>
 

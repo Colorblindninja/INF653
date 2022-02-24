@@ -4,13 +4,23 @@ require('model/item_db.php');
 require('model/category_db.php');
 include 'view/header.php';
 
+if(!get_categories()) {
+  add_category(NULL, "Default");
+  echo "Added a default category because the category list cannot be empty.";
+}
+
 if(isset($_POST["deleteType"])) {
     if($_POST["deleteType"] == 'todo') {
-      	delete_product($_POST["delete"]);
+      	delete_item($_POST["delete"]);
 		include 'view/item_list.php';
 
   } elseif ($_POST["deleteType"] == 'category') {
-  		delete_category($_POST["delete"]);
+    if(count(get_categories()) > 1){
+      delete_category($_POST["delete"]);
+    } else {
+      echo "Cannot delete the Category. You must have at least one category.";
+    }
+
 		include 'view/category_list.php';
   } else {
 	  	echo $_POST["deleteType"] . ' ';
@@ -23,9 +33,10 @@ if(isset($_POST["deleteType"])) {
 		  if ($_POST["title"]) {
 
 		  	$inputTitle = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
-		  	$inputDescription = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_STRING);
+        $inputDescription = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_STRING);
+		  	$inputCategory = filter_input(INPUT_POST, 'insertCategory', FILTER_SANITIZE_STRING);
 
-			add_product(NULL, $inputTitle, $inputDescription, 1);
+			add_item(NULL, $inputTitle, $inputDescription, $inputCategory);
 		  }	elseif (!isset($_POST["delete"]) && !$_POST["title"]) {
 		    echo 'Your To Do List item must have at least a title.';
 		  }
@@ -45,10 +56,10 @@ if(isset($_POST["deleteType"])) {
 		include 'view/category_list.php';
 	}
 } elseif(isset($_GET["view"])) {
-	if($_GET["view"] == 'todo'){
-			include 'view/item_list.php';
-		} elseif ($_GET["view"] == 'category') {
+	if($_GET["view"] == 'category'){
 			include 'view/category_list.php';
+		} else {
+			include 'view/item_list.php';
 		}
 } else {
 	include 'view/item_list.php';
